@@ -1,6 +1,19 @@
 # Compiled class file
 *.class
 
+# Eclipse files
+*.project
+*.classpath
+**/.settings
+bin
+
+# Gradle
+.gradle
+build
+
+# Generated sources
+src-gen
+
 # Log file
 *.log
 
