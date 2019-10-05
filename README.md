@@ -1,5 +1,5 @@
 ![Context Mapper](https://raw.githubusercontent.com/wiki/ContextMapper/context-mapper-dsl/logo/cm-logo-github-small.png) 
-# Context Mapping DSL (CML) Standalone Project Example [![Build Status](https://travis-ci.com/ContextMapper/context-mapper-standalone-example.svg?branch=master)](https://travis-ci.com/ContextMapper/context-mapper-standalone-example) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+# Context Mapping DSL (CML) Standalone Example Project [![Build Status](https://travis-ci.com/ContextMapper/context-mapper-standalone-example.svg?branch=master)](https://travis-ci.com/ContextMapper/context-mapper-standalone-example) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This is an example project illustrating how the [Context Mapper DSL (CML)](https://github.com/ContextMapper/context-mapper-dsl) language can be used as standalone library outside the Eclipse IDE. 
 
