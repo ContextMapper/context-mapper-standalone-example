@@ -7,6 +7,9 @@
 **/.settings
 bin
 
+# IntelliJ files
+.idea
+
 # Gradle
 .gradle
 build
