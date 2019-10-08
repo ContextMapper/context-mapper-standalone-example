@@ -39,7 +39,7 @@ public class MDSLGeneratorExample {
 		ContextMappingDSLStandaloneSetup.doSetup();
 		Resource resource = new ResourceSetImpl().getResource(URI.createURI(INSURANCE_EXAMPLE_URI), true);
 
-		// Create the PlantUML generator
+		// Create the MDSL generator
 		MDSLContractsGenerator generator = new MDSLContractsGenerator();
 
 		// Generate the contracts into 'src-gen'
