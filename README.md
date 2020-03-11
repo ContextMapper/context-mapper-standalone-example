@@ -8,7 +8,7 @@ The Context Mapper DSL library releases are available via the Maven central repo
 
 **Gradle:**
 ```gradle
-implementation 'org.contextmapper:context-mapper-dsl:5.8.1'
+implementation 'org.contextmapper:context-mapper-dsl:5.9.3'
 ```
 
 **Maven:**
@@ -16,7 +16,7 @@ implementation 'org.contextmapper:context-mapper-dsl:5.8.1'
 <dependency>
   <groupId>org.contextmapper</groupId>
   <artifactId>context-mapper-dsl</artifactId>
-  <version>5.8.1</version>
+  <version>5.9.3</version>
 </dependency>
 ```
 If you want to use our SNAPSHOT's built from the master branch ([context-mapper-dsl](https://github.com/ContextMapper/context-mapper-dsl)) you have to use the following repository: https://oss.sonatype.org/content/repositories/snapshots
@@ -33,6 +33,7 @@ This example project contains the following example classes written in Java whic
  * [ChangingModelExample](./src/main/java/org/contextmapper/standalone/example/ChangingModelExample.java): Illustrates how a model can be changed an then unparsed back to the CML file.
  * [PlantUMLGeneratorExample](./src/main/java/org/contextmapper/standalone/example/PlantUMLGeneratorExample.java): Shows how you can read your CML model and generate the [PlantUML diagrams](https://contextmapper.org/docs/plant-uml/) out of it easily.
  * [MDSLGeneratorExample](./src/main/java/org/contextmapper/standalone/example/MDSLGeneratorExample.java): Shows how to generate the [MDSL contracts](https://contextmapper.org/docs/mdsl/) out of the CML model.
+ * [GenericGeneratorExample](./src/main/java/org/contextmapper/standalone/example/GenericGeneratorExample.java): Illustrates how you can use [Freemarker](https://freemarker.apache.org/) templates to generate arbitrary textual files out of your Context Map.
  
 For details about the generators and the CML language please consult our [online documentation](https://contextmapper.org/docs) (currently we have no further documentation how to use the tools on code level in standalone applications).
 If you have questions how to use specific features within your standalone Java application don't hesitate to [create an issue](https://github.com/ContextMapper/context-mapper-standalone-example/issues) or [contact us](https://contextmapper.org/getting-involved/).
