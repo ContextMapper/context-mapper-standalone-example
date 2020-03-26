@@ -8,7 +8,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
-import org.contextmapper.dsl.generator.ContextMapGenerator;
 import org.contextmapper.standalone.example.FileSystemHelper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
