@@ -4,13 +4,10 @@ import org.apache.commons.cli.*;
 
 public class Program {
     public static void main(String[] args) throws Exception {
-
-        retrieveCommandLineInput(args);
-
-
+        CommandLineInput commandLineInput = retrieveCommandLineInput(args);
     }
 
-    private static void retrieveCommandLineInput(String[] args) {
+    private static CommandLineInput retrieveCommandLineInput(String[] args) {
         Options options = new Options();
 
         Option input = new Option("t", "type", true, "type of generator");
@@ -34,7 +31,6 @@ public class Program {
             System.exit(1);
         }
 
-        String generatorType = cmd.getOptionValue("type");
-        String filePath = cmd.getOptionValue("file");
+        return new CommandLineInput(cmd.getOptionValue("type"), cmd.getOptionValue("file"));
     }
 }
