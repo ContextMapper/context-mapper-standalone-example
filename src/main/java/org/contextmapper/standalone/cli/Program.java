@@ -50,11 +50,11 @@ public class Program {
         options.addOption(file);
 
         Option output = new Option("o", "output", true, "output folder");
-        file.setRequired(false);
+        output.setRequired(false);
         options.addOption(output);
 
         Option template = new Option("p", "template", true, "freemarker template");
-        file.setRequired(false);
+        template.setRequired(false);
         options.addOption(template);
 
         CommandLineParser parser = new DefaultParser();
