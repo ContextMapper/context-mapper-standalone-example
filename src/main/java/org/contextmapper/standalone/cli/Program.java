@@ -7,7 +7,7 @@ public class Program {
 
         Options options = new Options();
 
-        Option input = new Option("t", "type", true, "Type of generator");
+        Option input = new Option("t", "type", true, "type of generator");
         input.setRequired(true);
         options.addOption(input);
 
@@ -30,6 +30,9 @@ public class Program {
 
         String generatorType = cmd.getOptionValue("type");
         String filePath = cmd.getOptionValue("file");
+
+
+
 
     }
 }
