@@ -29,8 +29,9 @@ public class CommandLineInput {
     private final GeneratorTypeEnum generatorType;
     private final String filePath;
     private final String outputPath;
+    private final String freemarkerTemplate;
 
-    protected CommandLineInput(String generatorType, String filePath, String outputPath) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
+    protected CommandLineInput(String generatorType, String filePath, String outputPath, String freemarkerTemplate) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
         if (StringUtils.isBlank(generatorType)) {
             throw new NullOrWhitespaceGeneratorTypeException();
         }
@@ -45,21 +46,27 @@ public class CommandLineInput {
             this.outputPath = outputPath;
         }
 
+        if (StringUtils.isBlank(freemarkerTemplate)) {
+            this.freemarkerTemplate = "./src/main/resources/freemarker-sample-template.ftl";
+        } else {
+            this.freemarkerTemplate = freemarkerTemplate;
+        }
+
         this.generatorType = GeneratorTypeEnum.valueOf(generatorType.toUpperCase());
         this.filePath = filePath;
     }
 
     protected String filePath() {
-        return filePath;
+        return this.filePath;
     }
 
     public AbstractGenerator generator() throws GeneratorTypeEnumNotDefinedException {
-        switch (generatorType) {
+        switch (this.generatorType) {
             case CONTEXTMAP:
                 return new ContextMapGenerator();
             case GENERIC:
                 GenericContentGenerator generator = new GenericContentGenerator();
-                generator.setFreemarkerTemplateFile(new File("./src/main/resources/freemarker-sample-template.ftl"));
+                generator.setFreemarkerTemplateFile(new File(this.freemarkerTemplate));
                 generator.setTargetFileName("sample-output.md");
                 return generator;
             case MDSL:
@@ -72,6 +79,6 @@ public class CommandLineInput {
     }
 
     public String outputPath() {
-        return outputPath;
+        return this.outputPath;
     }
 }

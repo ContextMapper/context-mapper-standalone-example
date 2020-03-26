@@ -53,6 +53,10 @@ public class Program {
         file.setRequired(false);
         options.addOption(output);
 
+        Option template = new Option("p", "template", true, "freemarker template");
+        file.setRequired(false);
+        options.addOption(template);
+
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd = null;
@@ -66,7 +70,7 @@ public class Program {
             System.exit(1);
         }
 
-        return new CommandLineInput(cmd.getOptionValue("type"), cmd.getOptionValue("file"), cmd.getOptionValue("output"));
+        return new CommandLineInput(cmd.getOptionValue("type"), cmd.getOptionValue("file"), cmd.getOptionValue("output"), cmd.getOptionValue("template"));
     }
 
     private static void generateDiagram(AbstractGenerator generator, String filePath, String outputPath) {
