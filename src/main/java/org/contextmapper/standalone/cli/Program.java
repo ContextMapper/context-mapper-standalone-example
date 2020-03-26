@@ -1,10 +1,27 @@
 package org.contextmapper.standalone.cli;
 
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
+import org.contextmapper.dsl.generator.ContextMapGenerator;
+import org.contextmapper.standalone.example.FileSystemHelper;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.generator.AbstractGenerator;
+import org.eclipse.xtext.generator.GeneratorContext;
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 
 public class Program {
-    public static void main(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
+    public static void main(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException, GeneratorTypeEnumNotDefinedException {
         CommandLineInput commandLineInput = retrieveCommandLineInput(args);
+
+        generateDiagram(commandLineInput.generator(), commandLineInput.filePath());
     }
 
     private static CommandLineInput retrieveCommandLineInput(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
@@ -32,5 +49,14 @@ public class Program {
         }
 
         return new CommandLineInput(cmd.getOptionValue("type"), cmd.getOptionValue("file"));
+    }
+
+    private static void generateDiagram(AbstractGenerator generator, String filePath) {
+        ContextMappingDSLStandaloneSetup.doSetup();
+        Resource resource = new ResourceSetImpl().getResource(URI.createURI(filePath), true);
+
+        JavaIoFileSystemAccess javaIoFileSystemAccess = FileSystemHelper.getFileSystemAccess();
+        javaIoFileSystemAccess.setOutputPath("./src-gen");
+        generator.doGenerate(resource, javaIoFileSystemAccess, new GeneratorContext());
     }
 }
