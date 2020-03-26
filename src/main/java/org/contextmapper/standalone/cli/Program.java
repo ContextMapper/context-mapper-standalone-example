@@ -3,11 +3,11 @@ package org.contextmapper.standalone.cli;
 import org.apache.commons.cli.*;
 
 public class Program {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath {
         CommandLineInput commandLineInput = retrieveCommandLineInput(args);
     }
 
-    private static CommandLineInput retrieveCommandLineInput(String[] args) {
+    private static CommandLineInput retrieveCommandLineInput(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath {
         Options options = new Options();
 
         Option input = new Option("t", "type", true, "type of generator");
