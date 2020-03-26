@@ -35,7 +35,7 @@ public class Program {
     public static void main(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException, GeneratorTypeEnumNotDefinedException {
         CommandLineInput commandLineInput = retrieveCommandLineInput(args);
 
-        generateDiagram(commandLineInput.generator(), commandLineInput.filePath());
+        generateDiagram(commandLineInput.generator(), commandLineInput.filePath(), commandLineInput.outputPath());
     }
 
     private static CommandLineInput retrieveCommandLineInput(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
@@ -48,6 +48,10 @@ public class Program {
         Option file = new Option("f", "file", true, "CML file");
         file.setRequired(true);
         options.addOption(file);
+
+        Option output = new Option("o", "output", true, "output folder");
+        file.setRequired(false);
+        options.addOption(output);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -62,15 +66,15 @@ public class Program {
             System.exit(1);
         }
 
-        return new CommandLineInput(cmd.getOptionValue("type"), cmd.getOptionValue("file"));
+        return new CommandLineInput(cmd.getOptionValue("type"), cmd.getOptionValue("file"), cmd.getOptionValue("output"));
     }
 
-    private static void generateDiagram(AbstractGenerator generator, String filePath) {
+    private static void generateDiagram(AbstractGenerator generator, String filePath, String outputPath) {
         ContextMappingDSLStandaloneSetup.doSetup();
         Resource resource = new ResourceSetImpl().getResource(URI.createURI(filePath), true);
 
         JavaIoFileSystemAccess javaIoFileSystemAccess = FileSystemHelper.getFileSystemAccess();
-        javaIoFileSystemAccess.setOutputPath("./src-gen");
+        javaIoFileSystemAccess.setOutputPath(outputPath);
         generator.doGenerate(resource, javaIoFileSystemAccess, new GeneratorContext());
     }
 }

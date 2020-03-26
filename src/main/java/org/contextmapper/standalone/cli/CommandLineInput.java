@@ -28,14 +28,21 @@ import java.io.File;
 public class CommandLineInput {
     private final GeneratorTypeEnum generatorType;
     private final String filePath;
+    private final String outputPath;
 
-    protected CommandLineInput(String generatorType, String filePath) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
+    protected CommandLineInput(String generatorType, String filePath, String outputPath) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
         if (StringUtils.isBlank(generatorType)) {
             throw new NullOrWhitespaceGeneratorTypeException();
         }
 
         if (StringUtils.isBlank(filePath)) {
             throw new NullOrWhitespaceFilePath();
+        }
+
+        if (StringUtils.isBlank(outputPath)) {
+            this.outputPath = "./src-gen";
+        } else {
+            this.outputPath = outputPath;
         }
 
         this.generatorType = GeneratorTypeEnum.valueOf(generatorType.toUpperCase());
@@ -62,5 +69,9 @@ public class CommandLineInput {
         }
 
         throw new GeneratorTypeEnumNotDefinedException();
+    }
+
+    public String outputPath() {
+        return outputPath;
     }
 }
