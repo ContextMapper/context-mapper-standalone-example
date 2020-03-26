@@ -10,9 +10,9 @@ public class Program {
     private static CommandLineInput retrieveCommandLineInput(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
         Options options = new Options();
 
-        Option input = new Option("t", "type", true, "type of generator");
-        input.setRequired(true);
-        options.addOption(input);
+        Option generatorType = new Option("t", "type", true, "type of generator");
+        generatorType.setRequired(true);
+        options.addOption(generatorType);
 
         Option file = new Option("f", "file", true, "CML file");
         file.setRequired(true);
