@@ -2,6 +2,7 @@ plugins {
   id "java"
   id "eclipse"
   id "org.xtext.builder" version "2.0.7"
+  id "application"
 }
 
 group = 'org.contextmapper'
@@ -48,8 +49,12 @@ test {
 }
 
 jar {
+    from {
+        (configurations.runtime).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
     manifest {
         attributes 'Main-Class': 'org.contextmapper.standalone.cli.Program'
     }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
