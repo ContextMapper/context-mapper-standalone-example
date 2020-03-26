@@ -3,10 +3,10 @@ package org.contextmapper.standalone.cli;
 import org.apache.commons.lang.StringUtils;
 
 public class CommandLineInput {
-    private final String generatorType;
+    private final GeneratorTypeEnum generatorType;
     private final String filePath;
 
-    public CommandLineInput(String generatorType, String filePath) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath {
+    public CommandLineInput(String generatorType, String filePath) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
         if (StringUtils.isBlank(generatorType)) {
             throw new NullOrWhitespaceGeneratorTypeException();
         }
@@ -15,7 +15,7 @@ public class CommandLineInput {
             throw new NullOrWhitespaceFilePath();
         }
 
-        this.generatorType = generatorType;
+        this.generatorType = GeneratorTypeEnum.valueOf(generatorType.toUpperCase());
         this.filePath = filePath;
     }
 }

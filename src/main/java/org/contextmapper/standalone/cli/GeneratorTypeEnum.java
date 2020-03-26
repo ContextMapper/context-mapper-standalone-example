@@ -1,8 +1,8 @@
 package org.contextmapper.standalone.cli;
 
 public enum GeneratorTypeEnum {
-    CONTEXT_MAP,
+    CONTEXTMAP,
     GENERIC,
     MDSL,
-    PLANT_UML
+    PLANTUML
 }
