@@ -48,8 +48,18 @@ test {
     useJUnitPlatform()
 }
 
+application {
+    mainClassName = 'org.contextmapper.standalone.cli.Program'
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'org.contextmapper.standalone.cli.Program'
     }
+    doFirst {
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }
