@@ -49,6 +49,9 @@ public class GenericGeneratorExample {
         generator.setFreemarkerTemplateFile(new File(FREEMARKER_TEMPLATE));
         generator.setTargetFileName("sample-output.md");
 
+        // Use custom data if you want:
+        generator.registerCustomModelProperty("customText", "hello freemarker world");
+
         // Generate the diagrams into 'src-gen'
         JavaIoFileSystemAccess javaIoFileSystemAccess = FileSystemHelper.getFileSystemAccess();
         javaIoFileSystemAccess.setOutputPath("./src-gen");
