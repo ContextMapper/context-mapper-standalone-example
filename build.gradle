@@ -2,6 +2,7 @@ plugins {
   id "java"
   id "eclipse"
   id "org.xtext.builder" version "2.0.7"
+  id "application"
 }
 
 group = 'org.contextmapper'
@@ -19,7 +20,10 @@ dependencies {
 
     implementation "org.eclipse.xtend:org.eclipse.xtend.lib:${xtendLibVersion}"
     implementation "org.contextmapper:context-mapper-dsl:${cmlVersion}"
-    
+
+    implementation "commons-lang:commons-lang:${commonsLangVersion}"
+    implementation "commons-cli:commons-cli:${commonsCliVersion}"
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
@@ -42,4 +46,20 @@ xtext {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClassName = 'org.contextmapper.standalone.cli.Program'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.contextmapper.standalone.cli.Program'
+    }
+    doFirst {
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }

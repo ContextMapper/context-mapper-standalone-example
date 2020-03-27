@@ -17,6 +17,9 @@ build
 # Generated sources
 src-gen
 
+# Generated output
+out
+
 # Log file
 *.log
 
