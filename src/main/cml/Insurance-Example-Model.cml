@@ -145,42 +145,48 @@ BoundedContext PolicyManagementContext implements PolicyManagementDomain {
 	implementationTechnology = "Java, Spring App"
 	
 	Aggregate Offers {
+		owner ContractsTeam
+
 		Entity Offer {
 			aggregateRoot
-			
+
 			int offerId
 			- Customer client
 			- List<Product> products
 			BigDecimal price
 		}
 	}
-	
+
 	Aggregate Products {
+		owner ProductsTeam
+
 		Entity Product {
 			aggregateRoot
-			
+
 			- ProductId identifier
 			String productName
 		}
-		
+
 		ValueObject ProductId {
 			int productId key
 		}
 	}
-	
+
 	Aggregate Contract {
+		owner ContractsTeam
+
 		Entity Contract {
 			aggregateRoot
-			
+
 			- ContractId identifier
 			- Customer client
 			- List<Product> products
 		}
-		
+
 		ValueObject ContractId {
 			int contractId key
 		}
-		
+
 		Entity Policy {
 			int policyNr
 			- Contract contract
@@ -194,16 +200,16 @@ BoundedContext RiskManagementContext implements RiskManagementDomain {
 	domainVisionStatement = "Uses data from PolicyManagement context to calculate risks."
 	responsibilities = "Customer Risk Calculation"
 	implementationTechnology = "Java, Spring App"
-	
+
 	Aggregate Risks {
 		Entity CustomerRiskFactor {
 			aggregateRoot
-			
+
 			int totalRiskFactor
 			- List<Risk> risks
 			- Customer client
 		}
-		
+
 		ValueObject Risk {
 			int likelihood
 			String risk
@@ -216,11 +222,11 @@ BoundedContext DebtCollection implements DebtsDomain {
 	domainVisionStatement = "The debt collection context is responsible for the financial income of the insurance company (the debts) which depend on the corresponding contracts and policies."
 	responsibilities = "Debts, Dunning"
 	implementationTechnology = "JEE"
-	
+
 	Aggregate Debts {
 		Entity Debt {
 			aggregateRoot
-			
+
 			int debtNr
 			- Policy policy
 			Date creationDate
@@ -230,7 +236,7 @@ BoundedContext DebtCollection implements DebtsDomain {
 			PaymentStatus status
 			- List<Dunning> dunnigs
 		}
-		
+
 		Entity Dunning {
 			int dunningNr
 			- Debt debt
@@ -238,7 +244,12 @@ BoundedContext DebtCollection implements DebtsDomain {
 			Date paymentDeadline
 		}
 	}
-} 
+}
+
+/* Teams: */
+BoundedContext CustomersTeam { type TEAM }
+BoundedContext ContractsTeam { type TEAM }
+BoundedContext ProductsTeam { type TEAM }
 
 /* Domain & Subdomain Definitions */
 Domain InsuranceDomain {
