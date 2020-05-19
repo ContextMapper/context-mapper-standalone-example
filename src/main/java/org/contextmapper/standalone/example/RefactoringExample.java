@@ -17,14 +17,9 @@ package org.contextmapper.standalone.example;
 
 import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
 import org.contextmapper.dsl.cml.CMLResourceContainer;
-import org.contextmapper.dsl.contextMappingDSL.ContextMappingModel;
-import org.contextmapper.dsl.contextMappingDSL.Partnership;
-import org.contextmapper.dsl.contextMappingDSL.SharedKernel;
-import org.contextmapper.dsl.contextMappingDSL.UpstreamDownstreamRelationship;
-import org.contextmapper.dsl.refactoring.Refactoring;
+import org.contextmapper.dsl.refactoring.SemanticCMLRefactoring;
 import org.contextmapper.dsl.refactoring.SplitBoundedContextByOwner;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 /**
@@ -44,8 +39,9 @@ public class RefactoringExample {
         CMLResourceContainer resource = new CMLResourceContainer(new ResourceSetImpl().getResource(URI.createURI(INSURANCE_EXAMPLE_URI), true));
 
         // apply refactoring
-        Refactoring refactoring = new SplitBoundedContextByOwner("PolicyManagementContext");
-        refactoring.doRefactor(resource);
+        SemanticCMLRefactoring refactoring = new SplitBoundedContextByOwner("PolicyManagementContext");
+        refactoring.refactor(resource);
+        refactoring.persistChanges();
     }
 
 }
