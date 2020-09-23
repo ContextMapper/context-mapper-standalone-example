@@ -15,19 +15,20 @@
  */
 package org.contextmapper.standalone.example;
 
-import static org.contextmapper.standalone.example.ReadingModelExample.INSURANCE_EXAMPLE_URI;
-
-import java.io.IOException;
-
-import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
+import org.contextmapper.dsl.cml.CMLResource;
 import org.contextmapper.dsl.contextMappingDSL.Aggregate;
 import org.contextmapper.dsl.contextMappingDSL.BoundedContext;
 import org.contextmapper.dsl.contextMappingDSL.ContextMappingDSLFactory;
 import org.contextmapper.dsl.contextMappingDSL.ContextMappingModel;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.resource.SaveOptions;;
+import org.contextmapper.dsl.standalone.ContextMapperStandaloneSetup;
+import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
+import org.eclipse.xtext.resource.SaveOptions;
+
+import java.io.IOException;
+
+import static org.contextmapper.standalone.example.ReadingModelExample.INSURANCE_EXAMPLE_URI;
+
+;
 
 /**
  * This example shows how you can read your CML model, change it, and unparse
@@ -42,9 +43,9 @@ public class ChangingModelExample {
 
 	public static void main(String[] args) throws IOException {
 		// Setup and loading CML file:
-		ContextMappingDSLStandaloneSetup.doSetup();
-		Resource resource = new ResourceSetImpl().getResource(URI.createURI(INSURANCE_EXAMPLE_URI), true);
-		ContextMappingModel model = (ContextMappingModel) resource.getContents().get(0);
+		StandaloneContextMapperAPI contextMapper = ContextMapperStandaloneSetup.getStandaloneAPI();
+		CMLResource resource = contextMapper.loadCML(INSURANCE_EXAMPLE_URI);
+		ContextMappingModel model = resource.getContextMappingModel();
 
 		// We search for a Bounded Context ...
 		BoundedContext customerManagementBC = model.getBoundedContexts().stream()

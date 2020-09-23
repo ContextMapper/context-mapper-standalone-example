@@ -15,12 +15,10 @@
  */
 package org.contextmapper.standalone.example;
 
-import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
-import org.contextmapper.dsl.cml.CMLResourceContainer;
-import org.contextmapper.dsl.refactoring.SemanticCMLRefactoring;
+import org.contextmapper.dsl.cml.CMLResource;
 import org.contextmapper.dsl.refactoring.SplitBoundedContextByOwner;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.contextmapper.dsl.standalone.ContextMapperStandaloneSetup;
+import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 
 /**
  * This example shows how you can read your CML model and apply a refactoring.
@@ -35,13 +33,11 @@ public class RefactoringExample {
 
     public static void main(String[] args) {
         // Setup and loading CML file:
-        ContextMappingDSLStandaloneSetup.doSetup();
-        CMLResourceContainer resource = new CMLResourceContainer(new ResourceSetImpl().getResource(URI.createURI(INSURANCE_EXAMPLE_URI), true));
+        StandaloneContextMapperAPI contextMapper = ContextMapperStandaloneSetup.getStandaloneAPI();
+        CMLResource resource = contextMapper.loadCML(INSURANCE_EXAMPLE_URI);
 
         // apply refactoring
-        SemanticCMLRefactoring refactoring = new SplitBoundedContextByOwner("PolicyManagementContext");
-        refactoring.refactor(resource);
-        refactoring.persistChanges();
+        contextMapper.applyRefactoring(resource, new SplitBoundedContextByOwner("PolicyManagementContext"));
     }
 
 }

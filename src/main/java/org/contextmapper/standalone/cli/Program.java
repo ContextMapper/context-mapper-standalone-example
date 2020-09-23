@@ -24,6 +24,9 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
+import org.contextmapper.dsl.cml.CMLResource;
+import org.contextmapper.dsl.standalone.ContextMapperStandaloneSetup;
+import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -74,11 +77,8 @@ public class Program {
     }
 
     private static void generateDiagram(AbstractGenerator generator, String filePath, String outputPath) {
-        ContextMappingDSLStandaloneSetup.doSetup();
-        Resource resource = new ResourceSetImpl().getResource(URI.createURI(filePath), true);
-
-        JavaIoFileSystemAccess javaIoFileSystemAccess = FileSystemHelper.getFileSystemAccess();
-        javaIoFileSystemAccess.setOutputPath(outputPath);
-        generator.doGenerate(resource, javaIoFileSystemAccess, new GeneratorContext());
+        StandaloneContextMapperAPI contextMapper = ContextMapperStandaloneSetup.getStandaloneAPI();
+        CMLResource resource = contextMapper.loadCML(filePath);
+        contextMapper.callGenerator(resource, generator, outputPath);
     }
 }

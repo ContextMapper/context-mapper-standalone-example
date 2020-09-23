@@ -15,54 +15,52 @@
  */
 package org.contextmapper.standalone.example;
 
-import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
+import org.contextmapper.dsl.cml.CMLResource;
 import org.contextmapper.dsl.contextMappingDSL.ContextMappingModel;
 import org.contextmapper.dsl.contextMappingDSL.Partnership;
 import org.contextmapper.dsl.contextMappingDSL.SharedKernel;
 import org.contextmapper.dsl.contextMappingDSL.UpstreamDownstreamRelationship;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.contextmapper.dsl.standalone.ContextMapperStandaloneSetup;
+import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 
 /**
  * This example shows how you can read your CML model. We use the CML model
  * under src/main/cml/Insurance-Example-Model.cml and just printout some model
  * content...
- * 
- * @author Stefan Kapferer
  *
+ * @author Stefan Kapferer
  */
 public class ReadingModelExample {
 
-	public final static String INSURANCE_EXAMPLE_URI = "./src/main/cml/Insurance-Example-Model.cml";
+    public final static String INSURANCE_EXAMPLE_URI = "./src/main/cml/Insurance-Example-Model.cml";
 
-	public static void main(String[] args) {
-		// Setup and loading CML file:
-		ContextMappingDSLStandaloneSetup.doSetup();
-		Resource resource = new ResourceSetImpl().getResource(URI.createURI(INSURANCE_EXAMPLE_URI), true);
-		ContextMappingModel model = (ContextMappingModel) resource.getContents().get(0);
+    public static void main(String[] args) {
+        // Setup and loading CML file:
+        StandaloneContextMapperAPI contextMapper = ContextMapperStandaloneSetup.getStandaloneAPI();
+        CMLResource resource = contextMapper.loadCML(INSURANCE_EXAMPLE_URI);
+        ContextMappingModel model = resource.getContextMappingModel();
 
-		// Reading from our CML model:
-		System.out.println("The insurance example contains the following Bounded Contexts:");
-		model.getBoundedContexts().forEach(bc -> {
-			System.out.println(bc.getName());
-		});
+        // Reading from our CML model:
+        System.out.println("The insurance example contains the following Bounded Contexts:");
+        model.getBoundedContexts().forEach(bc -> {
+            System.out.println(bc.getName());
+        });
 
-		System.out.println("And relationships between these contexts exist:");
-		model.getMap().getRelationships().forEach(relationship -> {
-			if (relationship instanceof UpstreamDownstreamRelationship) {
-				UpstreamDownstreamRelationship upDownRel = (UpstreamDownstreamRelationship) relationship;
-				System.out.println(upDownRel.getUpstream().getName() + " -> " + upDownRel.getDownstream().getName());
-			} else if (relationship instanceof Partnership) {
-				Partnership partnership = (Partnership) relationship;
-				System.out.println(partnership.getParticipant1().getName() + " [P]<->[P] "
-						+ partnership.getParticipant2().getName());
-			} else if (relationship instanceof SharedKernel) {
-				SharedKernel sharedKernel = (SharedKernel) relationship;
-				System.out.println(sharedKernel.getParticipant1().getName() + " [SK]<->[SK] "
-						+ sharedKernel.getParticipant2().getName());
-			}
-		});
-	}
+        System.out.println("And relationships between these contexts exist:");
+        model.getMap().getRelationships().forEach(relationship -> {
+            if (relationship instanceof UpstreamDownstreamRelationship) {
+                UpstreamDownstreamRelationship upDownRel = (UpstreamDownstreamRelationship) relationship;
+                System.out.println(upDownRel.getUpstream().getName() + " -> " + upDownRel.getDownstream().getName());
+            } else if (relationship instanceof Partnership) {
+                Partnership partnership = (Partnership) relationship;
+                System.out.println(partnership.getParticipant1().getName() + " [P]<->[P] "
+                        + partnership.getParticipant2().getName());
+            } else if (relationship instanceof SharedKernel) {
+                SharedKernel sharedKernel = (SharedKernel) relationship;
+                System.out.println(sharedKernel.getParticipant1().getName() + " [SK]<->[SK] "
+                        + sharedKernel.getParticipant2().getName());
+            }
+        });
+    }
 
 }

@@ -15,15 +15,10 @@
  */
 package org.contextmapper.standalone.example;
 
-import org.contextmapper.dsl.ContextMappingDSLStandaloneSetup;
+import org.contextmapper.dsl.cml.CMLResource;
 import org.contextmapper.dsl.generator.GenericContentGenerator;
-import org.contextmapper.dsl.generator.PlantUMLGenerator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.generator.GeneratorContext;
-import org.eclipse.xtext.generator.IGenerator2;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.contextmapper.dsl.standalone.ContextMapperStandaloneSetup;
+import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 
 import java.io.File;
 
@@ -41,8 +36,8 @@ public class GenericGeneratorExample {
 
     public static void main(String[] args) {
         // Setup and loading CML file:
-        ContextMappingDSLStandaloneSetup.doSetup();
-        Resource resource = new ResourceSetImpl().getResource(URI.createURI(INSURANCE_EXAMPLE_URI), true);
+        StandaloneContextMapperAPI contextMapper = ContextMapperStandaloneSetup.getStandaloneAPI();
+        CMLResource resource = contextMapper.loadCML(INSURANCE_EXAMPLE_URI);
 
         // Create the generic generator (using Freemarker template)
         GenericContentGenerator generator = new GenericContentGenerator();
@@ -53,9 +48,7 @@ public class GenericGeneratorExample {
         generator.registerCustomModelProperty("customText", "hello freemarker world");
 
         // Generate the diagrams into 'src-gen'
-        JavaIoFileSystemAccess javaIoFileSystemAccess = FileSystemHelper.getFileSystemAccess();
-        javaIoFileSystemAccess.setOutputPath("./src-gen");
-        generator.doGenerate(resource, javaIoFileSystemAccess, new GeneratorContext());
+        contextMapper.callGenerator(resource, generator);
     }
 
 }
