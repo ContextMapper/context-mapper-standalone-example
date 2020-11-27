@@ -4,4 +4,3 @@ jdk:
 - openjdk11
 
 script: ./gradlew clean build
-
