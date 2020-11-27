@@ -1,5 +1,5 @@
 tasks:
-  - init: ./gradlew clean build
+  - init: ./gradlew clean build runWithExecJarExecutable
 image:
   file: .gitpod.Dockerfile
 vscode:

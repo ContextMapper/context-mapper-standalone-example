@@ -63,3 +63,10 @@ jar {
     }
     exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }
+
+task runWithExecJarExecutable(type: Exec) {
+    dependsOn jar
+    group = "Execution"
+    description = "Generate the PUML files"
+    commandLine "java", "-jar", jar.archiveFile.get(), "-f", "src/main/cml/Insurance-Example-Model.cml", "-t", "plantuml"
+}
