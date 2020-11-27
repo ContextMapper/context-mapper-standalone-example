@@ -1,5 +1,8 @@
+tasks:
+  - init: ./gradlew clean build
 image:
   file: .gitpod.Dockerfile
-
-tasks:
-  - init: ./gradlew build
+vscode:
+  extensions:
+    - jebbs.plantuml@2.13.12:LcphKtCbPTIScvq6ELiS8Q==
+    - contextmapper.context-mapper-vscode-extension@6.1.0:8GFbvb1Hm4qGvvP4s6Yi5A==
