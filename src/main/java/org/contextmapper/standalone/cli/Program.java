@@ -44,15 +44,15 @@ public class Program {
     private static CommandLineInput retrieveCommandLineInput(String[] args) throws NullOrWhitespaceGeneratorTypeException, NullOrWhitespaceFilePath, IllegalArgumentException {
         Options options = new Options();
 
-        Option generatorType = new Option("t", "type", true, "type of generator");
+        Option generatorType = new Option("t", "type", true, "type of generator [mandatory: contextmap, generic, mdsl, or plantuml]");
         generatorType.setRequired(true);
         options.addOption(generatorType);
 
-        Option file = new Option("f", "file", true, "CML file");
+        Option file = new Option("f", "file", true, "CML file [mandatory]");
         file.setRequired(true);
         options.addOption(file);
 
-        Option output = new Option("o", "output", true, "output folder");
+        Option output = new Option("o", "output", true, "output folder [default: src-gen]");
         output.setRequired(false);
         options.addOption(output);
 
