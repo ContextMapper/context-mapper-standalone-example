@@ -37,6 +37,11 @@ ContextMap InsuranceContextMap {
 		exposedAggregates = Customers
 	}
 
+	RiskManagementContext [D,CF]<-[U,OHS,PL] CustomerManagementContext {
+    	implementationTechnology = "RESTfulHTTP"
+    	exposedAggregates = Customers
+	}
+
 	DebtCollection [D,ACL]<-[U,OHS,PL] PrintingContext {
 		implementationTechnology = "SOAP"
 		exposedAggregates = Printing
