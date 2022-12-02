@@ -27,16 +27,3 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew clean build
-    - name: Install Graphviz
-      run: sudo apt-get install -y graphviz
-    - name: Generate image artifacts
-      run: java -jar ./build/libs/context-mapper-standalone-example-1.0.0-SNAPSHOT.jar -f ./src/main/cml/Insurance-Example-Model.cml -t contextmap
-    - name: Generate PlantUML artifacts
-      run: java -jar ./build/libs/context-mapper-standalone-example-1.0.0-SNAPSHOT.jar -f ./src/main/cml/Insurance-Example-Model.cml -t plantuml
-    - name: Generate MDSL artifacts
-      run: java -jar ./build/libs/context-mapper-standalone-example-1.0.0-SNAPSHOT.jar -f ./src/main/cml/Insurance-Example-Model.cml -t mdsl
-    - name: Save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: diagrams
-        path: src-gen/
