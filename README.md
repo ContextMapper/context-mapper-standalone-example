@@ -8,7 +8,7 @@ The Context Mapper DSL library releases are available via the Maven central repo
 
 **Gradle:**
 ```gradle
-implementation 'org.contextmapper:context-mapper-dsl:6.7.0'
+implementation 'org.contextmapper:context-mapper-dsl:6.8.0'
 ```
 
 **Maven:**
@@ -16,7 +16,7 @@ implementation 'org.contextmapper:context-mapper-dsl:6.7.0'
 <dependency>
   <groupId>org.contextmapper</groupId>
   <artifactId>context-mapper-dsl</artifactId>
-  <version>6.7.0</version>
+  <version>6.8.0</version>
 </dependency>
 ```
 If you want to use our SNAPSHOT's built from the master branch ([context-mapper-dsl](https://github.com/ContextMapper/context-mapper-dsl)) you have to use the following repository: https://oss.sonatype.org/content/repositories/snapshots
