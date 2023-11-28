@@ -8,7 +8,7 @@ The Context Mapper DSL library releases are available via the Maven central repo
 
 **Gradle:**
 ```gradle
-implementation 'org.contextmapper:context-mapper-dsl:6.8.0'
+implementation 'org.contextmapper:context-mapper-dsl:6.10.0'
 ```
 
 **Maven:**
@@ -16,7 +16,7 @@ implementation 'org.contextmapper:context-mapper-dsl:6.8.0'
 <dependency>
   <groupId>org.contextmapper</groupId>
   <artifactId>context-mapper-dsl</artifactId>
-  <version>6.8.0</version>
+  <version>6.10.0</version>
 </dependency>
 ```
 If you want to use our SNAPSHOT's built from the master branch ([context-mapper-dsl](https://github.com/ContextMapper/context-mapper-dsl)) you have to use the following repository: https://oss.sonatype.org/content/repositories/snapshots
@@ -37,28 +37,6 @@ This example project contains the following example classes written in Java whic
  
 For details about the generators and the CML language please consult our [online documentation](https://contextmapper.org/docs) (currently we have no further documentation how to use the tools on code level in standalone applications).
 If you have questions how to use specific features within your standalone Java application don't hesitate to [create an issue](https://github.com/ContextMapper/context-mapper-standalone-example/issues) or [contact us](https://contextmapper.org/getting-involved/).
-
-## CLI
-This example project also contains a `jar` that can be used from a CLI. To use it, you can build the project using any IDE, and use the generated `jar`. The available arguments are:
-```
- -f,--file <arg>       CML file
- -o,--output <arg>     output folder
- -p,--template <arg>   freemarker template
- -t,--type <arg>       type of generator
-```
-
-The `file` and `type` arguments are mandatory. If you don't specify an `output` it uses `src-gen` folder.
-
-The `type` of generators available are:
- * `contextmap`
- * `generic`
- * `mdsl`
- * `plantuml`
-
-As example, to run from a command line:
-```
-java -jar context-mapper-standalone-example-1.0.0-SNAPSHOT.jar -f Insurance-Example-Model.cml -t contextmap
-```
 
 ## Contributing
 Contribution is always welcome! Here are some ways how you can contribute:
